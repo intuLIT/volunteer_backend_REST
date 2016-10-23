@@ -27,7 +27,7 @@ class Event(models.Model):
     address = models.CharField(max_length=100)
     location = models.IntegerField()
     description = models.CharField(max_length=500)
-    photo = models.CharField(max_length=200)
+    photo = models.CharField(max_length=200, null=True)
     min_volunteers = models.IntegerField()
     max_volunteers = models.IntegerField()
     organization = models.ForeignKey(NonProfit, null=True)

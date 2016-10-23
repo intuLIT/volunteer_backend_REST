@@ -18,13 +18,11 @@ class UserDetail(APIView):
 class CreateEvent(APIView):
     def post(self, request, format=None):
         serializer = EventSerializer(data=request.data)
-        print repr(serializer)
-        print serializer.is_valid()
+        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 
 class EventsNearbyList(APIView):
@@ -36,26 +34,11 @@ class EventsNearbyList(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class CreateEvent(APIView):
-#     def post(self, request, format=None):
-#         serializer = EventSerializer(data=request.data)
-#         if serializer.is_valid():
-#             data = serializer.data
-#             serializer = NonProfitSerializer(data['organization'])
-#             if serializer.is_valid():
-#                 nonprofit = NonProfit.objects.get(pk=0)
-#                 print("here")
-#                 print(non)
-#                 event = Event(name=data['name'],
-#                     start_date=data['name'],
-#                     end_date=data['end_date'],
-#                     address=data['address'],
-#                     location=data['location'],
-#                     description=data['description'],
-#                     photo=data['photo'],
-#                     min_volunteers=data['min_volunteers'],
-#                     max_volunteers=data['max_volunteers'], 
-#                     organization=nonprofit)
-#                 goal.save()
-#                 return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserSignUp(APIView):
+    def post(self, request, format=None):
+        serializer = EventUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

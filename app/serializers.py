@@ -14,7 +14,6 @@ class NonProfitSerializer(serializers.ModelSerializer):
         model = NonProfit
         fields = ('id', 'name', 'description', 'user', 'location')
 
-
 class EventSerializer(serializers.ModelSerializer):
     organization = relations.PrimaryKeyRelatedField(queryset=NonProfit.objects.all())
     class Meta:
@@ -23,10 +22,19 @@ class EventSerializer(serializers.ModelSerializer):
             'address', 'location', 'description', 'photo',
             'min_volunteers', 'max_volunteers', 'organization')
 
+class EventUserSerializer(serializers.ModelSerializer):
+    uId = relations.PrimaryKeyRelatedField(queryset=User.objects.all())
+    eId = relations.PrimaryKeyRelatedField(queryset=Event.objects.all())
     
+    class Meta:
+        model = EventXUser
+        fields = ('uId', 'eId')
+
+
 # Serializers
 class EmailSerialzer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
 
 class ZipSerializer(serializers.Serializer):
     zip_code = serializers.IntegerField()
+
