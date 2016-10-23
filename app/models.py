@@ -9,6 +9,7 @@ class User(models.Model):
     phone = models.CharField(max_length=20)
     location = models.IntegerField(null=True)
     organization = models.IntegerField(null=True)
+    picture = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.id;
@@ -19,6 +20,7 @@ class NonProfit(models.Model):
     description = models.CharField(max_length=500)
     user = models.ForeignKey(User, null=True)
     location = models.IntegerField(null=True)
+    picture = models.CharField(max_length=100, null=True)
 
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
