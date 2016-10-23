@@ -8,6 +8,7 @@ class User(models.Model):
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
     location = models.IntegerField(null=True)
+    organization = models.IntegerField(null=True)
 
     def __str__(self):
         return self.id;
