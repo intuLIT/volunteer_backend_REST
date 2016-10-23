@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from snippets.models import *
+from app.models import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Snippet
+        model = User
         fields = ('id', 'name', 'email', 'phone', 'location',)
