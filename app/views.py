@@ -65,3 +65,16 @@ class UserSignUp(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ConvertId(APIView):
+    def post(self, request, format=None):
+        serializer = ConvertIdSerializer(data=request.data)
+        if serializer.is_valid():
+            np = NonProfit.objects.get(id=serializer.data['id'])
+            serializer = NonProfitSerializer(np)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    
+    

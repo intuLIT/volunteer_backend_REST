@@ -25,11 +25,10 @@ class EventSerializer(serializers.ModelSerializer):
 class EventUserSerializer(serializers.ModelSerializer):
     uId = relations.PrimaryKeyRelatedField(queryset=User.objects.all())
     eId = relations.PrimaryKeyRelatedField(queryset=Event.objects.all())
-    
+
     class Meta:
         model = EventXUser
         fields = ('uId', 'eId')
-
 
 # Serializers
 class EmailSerialzer(serializers.Serializer):
@@ -37,4 +36,7 @@ class EmailSerialzer(serializers.Serializer):
 
 class ZipSerializer(serializers.Serializer):
     zip_code = serializers.IntegerField()
+
+class ConvertIdSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
 
