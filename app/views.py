@@ -30,6 +30,11 @@ class CreateEvent(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class EventsAll(APIView):
+    def get(self, request, format=None):
+        events = Event.objects.all();
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class EventsNearbyList(APIView):
@@ -41,6 +46,7 @@ class EventsNearbyList(APIView):
             r = requests.get('https://www.zipcodeapi.com/rest/'+api_key+'/radius.json/'+zip_code+'/15/mile')
 
             pjson = json.loads(r.content)
+
             zip_codes = []
             for location in pjson['zip_codes']:
                 zip_codes.append(int(location['zip_code']))
