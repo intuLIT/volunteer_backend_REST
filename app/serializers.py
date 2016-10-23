@@ -28,3 +28,5 @@ class EventSerializer(serializers.ModelSerializer):
 class EmailSerialzer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
 
+class ZipSerializer(serializers.Serializer):
+    zip_code = serializers.IntegerField()
