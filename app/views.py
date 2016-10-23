@@ -10,7 +10,7 @@ class UserDetail(APIView):
     def post(self, request, format=None):
         serializer = EmailSerialzer(data=request.data)
         if serializer.is_valid():
-            user = User.objects.get(email=serializer.email)
+            user = User.objects.get(email=serializer.data['email'])
             serializer = UserSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
