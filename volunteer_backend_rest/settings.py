@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -69,14 +70,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'volunteer_backend_rest.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'volunteer_db',
+        'USER': 'admin',
+        'PASSWORD': 'password',
+        'HOST': 'volunteer.ciqzndzyzwah.us-west-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
 }
 
