@@ -4,7 +4,6 @@ from django.http import Http404, JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from app.fpauth import *
 
 from itertools import chain
 import json
