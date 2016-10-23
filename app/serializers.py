@@ -1,5 +1,6 @@
-from rest_framework import serializers
+from rest_framework import serializers, relations
 from app.models import *
+
 
 # Model Serializers
 class UserSerializer(serializers.ModelSerializer):
@@ -7,18 +8,23 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'name', 'email', 'phone', 'location',)
 
+class NonProfitSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = NonProfit
+        fields = ('id', 'name', 'description', 'user', 'location')
+
+
 class EventSerializer(serializers.ModelSerializer):
+    organization = relations.PrimaryKeyRelatedField(queryset=NonProfit.objects.all())
     class Meta:
         model = Event
         fields = ('id', 'name', 'start_date', 'end_date',
             'address', 'location', 'description', 'photo',
             'min_volunteers', 'max_volunteers', 'organization')
 
-class NonProfitSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = NonProfit
-        fileds = ('id', 'name', 'description', 'user', 'location')
-
+    
 # Serializers
 class EmailSerialzer(serializers.Serializer):
     email = serializers.CharField(max_length=100)
+
