@@ -40,3 +40,5 @@ class ZipSerializer(serializers.Serializer):
 class ConvertIdSerializer(serializers.Serializer):
     id = serializers.IntegerField()
 
+class ConvertEventIdSerializer(serializers.Serializer):
+    id = serializers.IntegerField()

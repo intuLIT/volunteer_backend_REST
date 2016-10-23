@@ -76,5 +76,13 @@ class ConvertId(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ConvertEventId(APIView):
+    def post(self, request, format=None):
+        serializer = ConvertEventIdSerializer(data=request.data)
+        if serializer.is_valid():
+            event = Event.objects.get(id=serializer.data['id'])
+            serializer = EventSerializer(event)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
