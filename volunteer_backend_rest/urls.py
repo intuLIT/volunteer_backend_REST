@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^user/info/$', views.UserDetail.as_view(), name="info"),
     url(r'^event/nearby/$', views.EventsNearbyList.as_view(), name="nearby"),
     # url(r'^event/create/$', views.CreateEvent.as_view(), name="eventCreate"),
+    url(r'^create_event', views.CreateEvent.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

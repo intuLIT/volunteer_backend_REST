@@ -19,6 +19,19 @@ class UserDetail(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class CreateEvent(APIView):
+    def post(self, request, format=None):
+        serializer = EventSerializer(data=request.data)
+        print repr(serializer)
+        print serializer.is_valid()
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
 class EventsNearbyList(APIView):
     def post(self, request, format=None):
         serializer = ZipSerializer(data=request.data)
