@@ -6,13 +6,13 @@ from app.models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'name', 'email', 'phone', 'location', 'organization', 'photo')
+        fields = ('id', 'name', 'email', 'phone', 'location', 'organization', 'picture')
 
 class NonProfitSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = NonProfit
-        fields = ('id', 'name', 'description', 'user', 'location', 'photo')
+        fields = ('id', 'name', 'description', 'user', 'location', 'picture')
 
 class EventSerializer(serializers.ModelSerializer):
     organization = relations.PrimaryKeyRelatedField(queryset=NonProfit.objects.all())
