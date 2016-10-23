@@ -1,9 +1,10 @@
 from app.models import User
 from app.serializers import *
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from app.fpauth import *
 
 from itertools import chain
 import json
@@ -84,5 +85,30 @@ class ConvertEventId(APIView):
             serializer = EventSerializer(event)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+class EventNumSignUps(APIView):
+    def post(self, request, format=None):
+        serializer = EventIdSerializer(data=request.data)
+        if serializer.is_valid():
+            e_id = serializer.data['event_id']
+            users = EventXUser.objects.filter(eId=e_id)
+            total = len(users)
+            return JsonResponse({'total':total})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class FacebookLogin(APIView):
+#     def post(self, request, format=None):
+#         serializer = FacebookAuthSerializer(data=request.data)
+#         if serializer.is_valid():
+#             app_id = serializer.data['a_id']
+#             app_secret = serializer.data['a_secret']
+
+#             GRAPH_API_AUTH_URI = ('https://graph.facebook.com/v2.8/oauth/' 
+#                 + 'access_token?'
+#                 + 'client_id=' + app_id
+#                 + '&redirect_uri=' + 'http://54.153.15.7:8080/'
+#                 + '&client_secret=' + self.app_secret
+#                 + '&code=')
+#             r = requests.get(GRAPH_API_AUTH_URI)
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^create_event', views.CreateEvent.as_view()),
     url(r'^add_user', views.UserSignUp.as_view()),
     url(r'^convert_id',views.ConvertId.as_view()),
-    url(r'^convert_event', views.ConvertEventId.as_view())
+    url(r'^convert_event', views.ConvertEventId.as_view()),
+    url(r'^event/attendees', views.EventNumSignUps.as_view())
 ]

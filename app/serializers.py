@@ -42,3 +42,10 @@ class ConvertIdSerializer(serializers.Serializer):
 
 class ConvertEventIdSerializer(serializers.Serializer):
     id = serializers.IntegerField()
+
+class FacebookAuthSerializer(serializers.Serializer):
+    a_id = serializers.CharField(max_length=200)
+    a_secret = serializers.CharField(max_length=200)
+
+class EventIdSerializer(serializers.Serializer):
+    event_id = serializers.IntegerField()
